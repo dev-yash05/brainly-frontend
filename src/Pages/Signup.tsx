@@ -35,7 +35,8 @@ export function Signup() {
   }
   return (
     <div className="h-screen w-screen bg-gray-200 flex justify-center items-center">
-      <div className="bg-white rounded border min-w-48">
+      <div className="bg-white rounded min-w-48 px-8 py-8 shadow-2xl">
+        <div className="text-2xl font-semibold text-center pb-3 text-gray-700">Signup</div>
         <Input placeholder="Username" ref={usernameRef} />
         <Input placeholder="Password" ref={passwordRef} />
         <div className="flex justify-center pb-2 pt-2 px-2">
