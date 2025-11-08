@@ -1,6 +1,7 @@
-import { TwitterTweetEmbed } from "react-twitter-embed";
+
 import { DeleteIcon } from "../icons/DeleteIcon";
 import { ShareIcon } from "../icons/ShareIcon";
+import { useEffect } from "react";
 
 interface CardProps {
   title: string;
@@ -116,7 +117,7 @@ const Card = ({ title, link, type }: CardProps) => {
             })()}
 
           {type === "twitter" && tweetId ? (
-            <TwitterTweetEmbed tweetId={tweetId} />
+            <Tweet id={tweetId} />
           ) : type === "twitter" ? (
             // Fallback UI so you can see there was a problem extracting the id
             <div className="p-4 border rounded bg-gray-50 text-sm text-gray-600">
@@ -141,6 +142,29 @@ const Card = ({ title, link, type }: CardProps) => {
 };
 
 export default Card;
+
+function Tweet({ id }: { id: string }) {
+  useEffect(() => {
+    // Load the Twitter script if not already present
+    if (!document.getElementById("twitter-wjs")) {
+      const script = document.createElement("script");
+      script.id = "twitter-wjs";
+      script.src = "https://platform.twitter.com/widgets.js";
+      script.async = true;
+      document.body.appendChild(script);
+    } else {
+      // If script is already loaded, refresh widgets
+      // @ts-ignore
+      window.twttr?.widgets?.load();
+    }
+  }, [id]);
+
+  return (
+    <blockquote className="twitter-tweet">
+      <a href={`https://twitter.com/i/status/${id}`}>Loading tweet...</a>
+    </blockquote>
+  );
+}
 
 // import { TwitterTweetEmbed } from "react-twitter-embed";
 // import { DeleteIcon } from "../icons/DeleteIcon";
