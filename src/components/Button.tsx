@@ -5,6 +5,8 @@ import { ReactElement } from "react";
     text: string;
     startIcon?: ReactElement;
     onClick?: () => void;
+    fullWidth?: boolean;
+    loading?: boolean;
   }
 
   const variantClasses = {
@@ -13,9 +15,9 @@ import { ReactElement } from "react";
   }
   const defaultStyles = "px-4 py-2 rounded-md font-normal flex gap-1 items-center shadow-md cursor-pointer"
   
-  const Button = ({variant, text, startIcon, onClick}: ButtonProps) => {
+  const Button = ({variant, text, startIcon, onClick, fullWidth, loading}: ButtonProps) => {
   return (
-    <button onClick={onClick} className={variantClasses[variant]+ " " +defaultStyles}>{startIcon}{text}</button>
+    <button onClick={onClick} className={variantClasses[variant]+ " " + defaultStyles + `${fullWidth ? " w-full flex justify-center items-center" : ""} ${loading ? " opacity-45": ""}`} disabled={loading}>{startIcon}{loading ? "loading..." : text}</button>
   )
 }
 
