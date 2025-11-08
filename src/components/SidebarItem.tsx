@@ -1,7 +1,11 @@
-const SidebarItem = () => {
+const SidebarItem = ({text, icon} : {
+  text: string;
+  icon: React.ReactElement;
+}) => {
   return (
-    <div>
-      Sidebar Item
+    <div className="flex text-gray-700 py-2 cursor-pointer hover:bg-gray-200 rounded max-w-48 pl-4 transition-all">
+      <div className="pr-2">{icon}</div>
+      <div className="">{text}</div>
     </div>
   )
 }
